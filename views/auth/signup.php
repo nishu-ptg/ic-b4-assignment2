@@ -30,6 +30,7 @@
         class="space-y-6 animate-fadeIn"
     >
         <div class="grid grid-cols-1 gap-4">
+
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2"
                 >Full Name</label
@@ -58,156 +59,163 @@
                         name="name"
                         class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent input-focus transition-all duration-300"
                         placeholder="John doe"
+                        value="<?= old('name') ?>"
                     />
                 </div>
+                <?= errorMsg('name') ?>
             </div>
-        </div>
 
-        <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2"
-            >Email Address</label
-            >
-            <div class="relative">
-                <div
-                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2"
+                >Email Address</label
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        class="w-5 h-5 text-gray-400"
+                <div class="relative">
+                    <div
+                        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
                     >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
-                        />
-                    </svg>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-5 h-5 text-gray-400"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                            />
+                        </svg>
+                    </div>
+                    <input
+                        type="email"
+                        name="email"
+                        class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent input-focus transition-all duration-300"
+                        placeholder="you@example.com"
+                        value="<?= old('email') ?>"
+                    />
                 </div>
-                <input
-                    type="email"
-                    name="email"
-                    class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent input-focus transition-all duration-300"
-                    placeholder="you@example.com"
-                />
+                <?= errorMsg('email') ?>
             </div>
-        </div>
 
-        <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2"
-            >Password</label
-            >
-            <div class="relative">
-                <div
-                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2"
+                >Password</label
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        class="w-5 h-5 text-gray-400"
+                <div class="relative">
+                    <div
+                        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
                     >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
-                        />
-                    </svg>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-5 h-5 text-gray-400"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                            />
+                        </svg>
+                    </div>
+                    <input
+                        type="password"
+                        name="password"
+                        class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent input-focus transition-all duration-300"
+                        placeholder="••••••••"
+                    />
                 </div>
-                <input
-                    type="password"
-                    name="password"
-                    class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent input-focus transition-all duration-300"
-                    placeholder="••••••••"
-                />
+                <?= errorMsg('password') ?>
             </div>
-        </div>
 
-        <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2"
-            >Confirm Password</label
-            >
-            <div class="relative">
-                <div
-                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2"
+                >Confirm Password</label
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        class="w-5 h-5 text-gray-400"
+                <div class="relative">
+                    <div
+                        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
                     >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
-                        />
-                    </svg>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-5 h-5 text-gray-400"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                            />
+                        </svg>
+                    </div>
+                    <input
+                        type="password"
+                        name="confirm_password"
+                        class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent input-focus transition-all duration-300"
+                        placeholder="••••••••"
+                    />
                 </div>
-                <input
-                    type="password"
-                    name="confirm_password"
-                    class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent input-focus transition-all duration-300"
-                    placeholder="••••••••"
-                />
+                <?= errorMsg('confirm_password') ?>
             </div>
-        </div>
 
-        <div class="flex items-start">
-            <div class="flex items-center h-5">
-                <input
-                    id="terms"
-                    name="terms"
-                    type="checkbox"
-                    class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                />
-            </div>
-            <div class="ml-3 text-sm">
-                <label for="terms" class="text-gray-700"
-                >I agree to the
-                    <a
-                        href="#"
-                        class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
-                    >Terms and Conditions</a
+            <div class="flex items-start">
+                <div class="flex items-center h-5">
+                    <input
+                        id="terms"
+                        name="terms"
+                        type="checkbox"
+                        class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                </div>
+                <div class="ml-3 text-sm">
+                    <label for="terms" class="text-gray-700"
+                    >I agree to the
+                        <a
+                            href="#"
+                            class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
+                        >Terms and Conditions</a
+                        >
+                        and
+                        <a
+                            href="#"
+                            class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
+                        >Privacy Policy</a
+                        ></label
                     >
-                    and
-                    <a
-                        href="#"
-                        class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
-                    >Privacy Policy</a
-                    ></label
-                >
+                </div>
             </div>
-        </div>
 
-        <button
-            type="submit"
-            class="group relative w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg"
-        >
-            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-5 h-5 text-indigo-300 group-hover:text-white transition-colors"
-              >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM3 15.75h3m0 0h3m-3 0V12m0 3.75V18"
-                />
-              </svg>
-            </span>
-            Create Account
-        </button>
+            <button
+                type="submit"
+                class="group relative w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg"
+            >
+                <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                  <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-5 h-5 text-indigo-300 group-hover:text-white transition-colors"
+                  >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM3 15.75h3m0 0h3m-3 0V12m0 3.75V18"
+                    />
+                  </svg>
+                </span>
+                Create Account
+            </button>
+
+        </div>
     </form>
 </div>
 

@@ -9,6 +9,9 @@ function view(string $path, array $data = [], string $layout = 'main')
     $content = ob_get_clean();
 
     require_once __DIR__ . "/views/layouts/{$layout}.php";
+
+    unset($_SESSION['_errors']);
+    unset($_SESSION['_old']);
 }
 
 function route(string $name = ''): string
@@ -48,4 +51,59 @@ function redirect(string $routeName)
 {
     header("Location: " . route($routeName));
     exit;
+}
+
+function sanitizeInput($data)
+{
+    return is_array($data)
+        ? array_map(fn($item) => sanitizeInput($item), $data)
+        : (is_string($data) ? trim($data) : $data);
+}
+
+function goBack(array $errors = [], array $old = [])
+{
+    $_SESSION['_errors'] = $errors;
+    $_SESSION['_old'] = $old;
+
+    header("Location: " . $_SERVER['HTTP_REFERER']);
+    exit;
+}
+
+function e(string $value): string
+{
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+}
+
+function old(string $field, string $default = ''): string
+{
+    return e($_SESSION['_old'][$field] ?? $default);
+}
+
+function error(string $field): string
+{
+    return $_SESSION['_errors'][$field][0] ?? '';
+}
+
+function dump(...$vars): void
+{
+    echo '<div style="background: #000; color: #fff;">';
+    foreach ($vars as $var) {
+        echo '<pre>'; print_r($var); echo '</pre>';
+    }
+    echo '</div>';
+}
+
+function dd(...$vars): void
+{
+    dump(...$vars);
+    die();
+}
+
+function errorMsg(string $field, string $class = 'text-red-500 text-sm m-1'): string
+{
+    $msg = error($field);
+
+    if (empty($msg)) return '';
+
+    return "<p class='{$class}'>{$msg}</p>";
 }
