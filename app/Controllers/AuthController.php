@@ -6,7 +6,9 @@ class AuthController
 {
     public function login()
     {
-        die(__METHOD__);
+        $content = __DIR__ . '/../../views/auth/login.php';
+
+        require __DIR__ . '/../../views/layouts/auth.php';
     }
 
     public function handleLogin()
@@ -16,6 +18,8 @@ class AuthController
 
     public function signup()
     {
-        die(__METHOD__);
+        $content = __DIR__ . '/../../views/auth/signup.php';
+
+        require __DIR__ . '/../../views/layouts/auth.php';
     }
 }
