@@ -27,7 +27,7 @@
                 <div class="p-4 border rounded-lg">
                     <p class="text-gray-500 text-sm">Email</p>
                     <p class="font-medium">
-                        <?= e($user['name'] ?? '') ?>
+                        <?= e($user['email'] ?? '') ?>
                     </p>
                 </div>
             </div>

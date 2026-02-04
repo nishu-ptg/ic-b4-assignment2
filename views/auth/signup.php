@@ -165,31 +165,35 @@
                 <?= errorMsg('confirm_password') ?>
             </div>
 
-            <div class="flex items-start">
-                <div class="flex items-center h-5">
-                    <input
-                        id="terms"
-                        name="terms"
-                        type="checkbox"
-                        class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                    />
-                </div>
-                <div class="ml-3 text-sm">
-                    <label for="terms" class="text-gray-700"
-                    >I agree to the
-                        <a
-                            href="#"
-                            class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
-                        >Terms and Conditions</a
+            <div>
+                <div class="flex items-start">
+                    <div class="flex items-center h-5">
+                        <input
+                            id="terms"
+                            name="terms"
+                            type="checkbox"
+                            <?= old('terms') ? 'checked' : '' ?>
+                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                        />
+                    </div>
+                    <div class="ml-3 text-sm">
+                        <label for="terms" class="text-gray-700"
+                        >I agree to the
+                            <a
+                                href="#"
+                                class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
+                            >Terms and Conditions</a
+                            >
+                            and
+                            <a
+                                href="#"
+                                class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
+                            >Privacy Policy</a
+                            ></label
                         >
-                        and
-                        <a
-                            href="#"
-                            class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
-                        >Privacy Policy</a
-                        ></label
-                    >
+                    </div>
                 </div>
+                <?= errorMsg('terms') ?>
             </div>
 
             <button

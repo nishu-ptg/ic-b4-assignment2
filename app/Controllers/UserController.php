@@ -117,6 +117,17 @@ class UserController
             $errors['email'][] = 'Invalid email format.';
         }
 
+        if (empty($errors['email'])) {
+            $existing = db_query(
+                "SELECT id FROM users WHERE email = ? AND id != ? LIMIT 1",
+                [$data['email'], $this->user['id']]
+            )->fetch();
+
+            if ($existing) {
+                $errors['email'][] = 'Email already registered.';
+            }
+        }
+
         return $errors;
     }
 

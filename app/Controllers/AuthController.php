@@ -116,12 +116,23 @@ class AuthController
             $errors['email'][] = 'Invalid email format.';
         }
 
+        if (empty($errors['email'])) {
+            $user = db_query("SELECT id FROM users WHERE email = ? LIMIT 1", [$data['email']])->fetch();
+            if ($user) {
+                $errors['email'][] = 'Email already registered.';
+            }
+        }
+
         if (strlen($data['password'] ?? '') < 6) {
             $errors['password'][] = "Password must be at least 6 characters.";
         }
 
         if (($data['password'] ?? '') !== ($data['confirm_password'] ?? '')) {
             $errors['confirm_password'][] = "Passwords do not match.";
+        }
+
+        if (empty($data['terms'])) {
+            $errors['terms'][] = "You must agree to the terms and conditions.";
         }
 
         return $errors;
