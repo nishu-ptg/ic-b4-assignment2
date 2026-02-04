@@ -1,3 +1,15 @@
+# Composer
+/vendor/
+
+# IDE (JetBrains)
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+
 # Default ignored files
 /shelf/
 /workspace.xml
