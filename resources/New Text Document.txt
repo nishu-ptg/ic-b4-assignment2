@@ -1,0 +1,95 @@
+Assignment Link: https://interactivecares.com/dashboard/336/content?tab=live&module=4432&id=31
+Resource Link: https://drive.google.com/file/d/17ZW2Kjs09SKART_KeLNH0SQhq9FOMFsm/view
+
+===
+
+Assignment -02 [Authentication & Profile Management]
+Task . 100 marks (Pass Marks: 40)
+
+Technologies :
+==============
+- PHP (Object-Oriented Programming – OOP)
+- MySQL
+- HTML/CSS/Tailwindcss
+
+Objective:
+==========
+The objective of this assignment is to design and develop a secure user authentication and profile management system using PHP (OOP principles) and MySQL. This system will allow users to register, log in, manage their profile, and log out securely.
+
+Assignment Requirements:
+========================
+1. User Registration-
+---------------------
+Create a registration form with the following fields:
+
+- Full Name
+- Email (must be unique)
+- Password
+- Password must be hashed before storing in the database.
+- Validate user input (empty fields, valid email format, password length).
+- Store user data in a MySQL database.
+
+2. User Login-
+--------------
+- Create a login form using email and password.
+- Verify user credentials from the database.
+- Use sessions to maintain login state.
+- Display appropriate error messages for invalid login attempts.
+
+3. Profile Management-
+----------------------
+After login, users should be able to:
+
+- View their profile information
+- Update their profile (name, email, password – optional)
+- Ensure only the logged-in user can access and update their profile.
+
+4. Logout-
+----------
+- Implement a logout feature.
+- Destroy session data securely.
+- Redirect users to the login page after logout.
+
+5. Database Design-
+-------------------
+Create a MySQL database with at least one table:
+Users-
+Suggested fields:
+
+- id (Primary Key)
+- name
+- email
+- password
+- created_at
+
+6. Security Considerations-
+---------------------------
+- Use password hashing (password_hash, password_verify)
+- Prevent SQL Injection (Prepared Statements)
+- Restrict access to authenticated pages
+- Validate and sanitize user input
+
+
+নির্দেশনাঃ
+১। ভালো করে অ্যাসাইনমেন্টের নির্দেশনা গুলো পড়ুন।
+২। এই এসাইনমেন্টে আপনাকে UI প্রদান করা হবে।
+৩। UI এর Resource URL: Resource Link
+৪। এরপরেও যদি অ্যাসাইনমেন্ট সম্পর্কিত কোন প্রশ্ন থাকে তাহলে অবশ্যই সাপোর্টে এসে কথা বলবেন
+৫। অ্যাসাইনমেন্টের মার্কস ১০০ (পাস মার্কস ৪০)
+৬। এসাইনমেন্ট জমা দেওয়ার শেষ তারিখ (০৫ ফেব্রুয়ারি ২০২৬) রাত ১১টা ৫৯ মিনিট পর্যন্ত।
+৭। এসাইনমেন্ট জমা দেওয়ার শেষ তারিখ অতিক্রম হবার পর জমা দিলে ৫০% মার্কস কর্তন হবে
+৮। অ্যাসাইনমেন্ট এর সমস্ত সোর্স কোড গিটহাব এ আপলোড করতে হবে এবং readme.md file এ নিচের তথ্যগুলো প্রদান করতে হবে
+
+প্রজেক্ট এর root ডিরেক্টরীতে একটি readme.md file তৈরি করুন
+তারপর রেডমি ফাইলে নিচের দেওয়া তথ্য গুলো লিখুন
+
+# Assignment : কত নাম্বার এসাইনমেন্ট তা লিখুন
+### Name : আপনার নাম লিখুন
+### Email: (আপনার জিমেইল এড্রেস লিখুন যে যে জিমেইল দিয়ে আপনি কোর্স purchase করেছেন)
+
+পুন:রায় গিটহাব এ readme ফাইল সহ কোড গুলো পুশ করুন
+
+৯। এসাইনমেন্টের গিটহাব রিপোজিটরিটির লিংক কপি করুন এবং সেটি ওয়েবসাইটে জমা দিন ( গিটহাব রিপোজিটরিটি অবশ্যই পাবলিক থাকতে হবে)
+
+
+Submit your task by providing a link to the relevant GitHub repository, Google Docs, or Google Drive file in the designated field. Ensure the link is accessible and points directly to the task content. If sharing a Google file, verify sharing settings allow access.
