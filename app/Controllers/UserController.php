@@ -67,6 +67,7 @@ class UserController
                 $this->user['id']
             ]);
 
+        flash('success', 'Profile updated successfully!');
         redirect('dashboard');
     }
 
@@ -100,6 +101,7 @@ class UserController
                 $this->user['id']
             ]);
 
+        flash('success', 'Password changed successfully!');
         redirect('dashboard');
     }
 
@@ -138,6 +140,14 @@ class UserController
         foreach (['current_password', 'new_password', 'confirm_new_password'] as $field) {
             if (empty($data[$field])) {
                 $errors[$field][] = ucfirst(str_replace('_', ' ', $field)) . ' is required.';
+            }
+        }
+
+        if (empty($errors)) {
+            $user = db_query("SELECT password FROM users WHERE id = ?", [$this->user['id']])->fetch();
+
+            if (!password_verify($data['current_password'], $user['password'])) {
+                $errors['current_password'][] = "Current password is incorrect.";
             }
         }
 

@@ -12,6 +12,7 @@ function view(string $path, array $data = [], string $layout = 'main')
 
     unset($_SESSION['_errors']);
     unset($_SESSION['_old']);
+    unset($_SESSION['_flash']);
 }
 
 function route(string $name = ''): string
@@ -113,4 +114,33 @@ function errorMsg(string $field, string $class = 'text-red-500 text-sm m-1'): st
     if (empty($msg)) return '';
 
     return "<p class='{$class}'>{$msg}</p>";
+}
+
+//function flash(string $key, string $message)
+//{
+//    $_SESSION['_flash'][$key] = $message;
+//}
+
+function flash(string $key, string $message = null): ?string
+{
+    // disclaimer: generated using AI
+    
+    // 1. SETTING MODE: If a message is passed, store it and stop.
+    if ($message !== null) {
+        $_SESSION['_flash'][$key] = $message;
+        return null;
+    }
+
+    // 2. GETTING MODE: If no message is passed, try to retrieve it.
+    if (isset($_SESSION['_flash'][$key])) {
+        $message = $_SESSION['_flash'][$key];
+
+        // 3. THE "FLASH" MAGIC: Delete it from the session immediately.
+        unset($_SESSION['_flash'][$key]);
+
+        // Return the escaped message so it's safe to print.
+        return e($message);
+    }
+
+    return null;
 }

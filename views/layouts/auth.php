@@ -47,6 +47,8 @@
 >
     <div class="max-w-md w-full space-y-8">
 
+        <?php require_once __DIR__ . '/../_alerts.php'; ?>
+
         <?= $content; ?>
 
     </div>

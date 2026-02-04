@@ -39,6 +39,7 @@ class AuthController
             $hashedPassword
         ]);
 
+        flash('success', 'Signup successful! Please log in.');
         redirect("login");
     }
 
