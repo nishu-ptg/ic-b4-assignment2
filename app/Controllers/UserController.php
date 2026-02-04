@@ -4,9 +4,29 @@ namespace App\Controllers;
 
 class UserController
 {
+    protected $user;
+
+    public function __construct()
+    {
+        $id = $_SESSION['user_id'] ?? null;
+        if (!$id) redirect('login');
+
+        $this->user = db_query("
+                SELECT id, name, email 
+                FROM users 
+                WHERE id = ? 
+                LIMIT 1
+            ", [$id])
+            ->fetch();
+
+        if (!$this->user) { // what happened? user deleted??
+            unset($_SESSION['user_id']);
+            redirect('login');
+        }
+    }
     public function dashboard()
     {
-        $user = $_SESSION['user'];
+        $user = $this->user;
 
         view('user/dashboard', [
             'title' => 'Dashboard',
@@ -14,6 +34,7 @@ class UserController
                 'header' => 'My Dashboard',
                 'subHeader' => "Welcome back, {$user["name"]}!",
             ],
+            'user' => $user,
         ]);
     }
 

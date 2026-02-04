@@ -47,6 +47,13 @@ function db(): PDO
     return \App\DB::connect();
 }
 
+function db_query(string $sql, array $params = []): PDOStatement
+{
+    $stmt = db()->prepare($sql);
+    $stmt->execute($params);
+    return $stmt;
+}
+
 function redirect(string $routeName)
 {
     header("Location: " . route($routeName));

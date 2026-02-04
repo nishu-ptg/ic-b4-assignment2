@@ -4,6 +4,13 @@ namespace App\Controllers;
 
 class AuthController
 {
+    public function __construct()
+    {
+        if (isset($_SESSION['user_id']) && !isRoute('logout')) {
+            redirect('dashboard');
+        }
+    }
+
     public function signup()
     {
         view('auth/signup', [
@@ -50,14 +57,23 @@ class AuthController
 
         if(!empty($errors)) goBack($errors, $input);
 
-        $stmt = db()->prepare("
-            SELECT id, name, email, password
-            FROM users
+//        $stmt = db()->prepare("
+//            SELECT id, email, password
+//            FROM users
+//            WHERE email = ?
+//            LIMIT 1
+//        ");
+//        $stmt->execute([$input['email']]);
+//        $user = $stmt->fetch();
+
+        $user = db_query("
+            SELECT id, email, password 
+            FROM users 
             WHERE email = ?
             LIMIT 1
-        ");
-        $stmt->execute([$input['email']]);
-        $user = $stmt->fetch();
+        ", [
+            $input['email']
+        ])->fetch();
 
 //        dd($user);
 
@@ -67,14 +83,14 @@ class AuthController
             ], $input);
         }
 
-        $_SESSION['user'] = [
-            'id'   => $user['id'],
-            'name' => $user['name'],
-            'email'=> $user['email']
-        ];
+//        $_SESSION['user'] = [
+//            'id'   => $user['id'],
+//            'name' => $user['name'],
+//            'email'=> $user['email']
+//        ];
+        $_SESSION['user_id'] = $user['id'];
 
         redirect('dashboard');
-
     }
 
     private function validateSignup(array $data): array
