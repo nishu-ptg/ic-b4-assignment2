@@ -1,0 +1,16 @@
+{
+    "name": "nishu/ic-b4-assignment2",
+    "description": "Interactive Cares Laravel Batch 4 Assignment 02",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ali Nishu",
+            "email": "nishu.ptg@gmail.com"
+        }
+    ],
+    "require": {}
+}
