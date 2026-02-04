@@ -6,7 +6,9 @@ class AuthController
 {
     public function login()
     {
-        view('auth/login', [], 'auth');
+        view('auth/login', [
+            'title' => 'Login',
+        ], 'auth');
     }
 
     public function handleLogin()
@@ -16,6 +18,8 @@ class AuthController
 
     public function signup()
     {
-        view('auth/signup', [], 'auth');
+        view('auth/signup', [
+            'title' => 'Sign Up',
+        ], 'auth');
     }
 }

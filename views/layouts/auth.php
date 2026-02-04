@@ -47,7 +47,7 @@
 >
     <div class="max-w-md w-full space-y-8">
 
-        <?php require $content; ?>
+        <?= $content; ?>
 
     </div>
 </body>

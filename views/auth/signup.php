@@ -207,7 +207,7 @@
     <p>
         Already have an account?
         <a
-            href="login.html"
+            href="<?= route('login') ?>"
             class="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors"
         >Sign in</a
         >

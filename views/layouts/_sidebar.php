@@ -33,8 +33,8 @@
     <div class="p-4">
         <nav class="space-y-1">
             <a
-                href="./dashboard.html"
-                class="flex items-center space-x-3 p-3 rounded-lg sidebar-link active"
+                href="<?= route('dashboard') ?>"
+                class="flex items-center space-x-3 p-3 rounded-lg sidebar-link <?= activeClass('dashboard') ?>"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -53,8 +53,8 @@
                 <span class="font-medium">My Profile</span>
             </a>
             <a
-                href="./edit-profile.html"
-                class="flex items-center space-x-3 p-3 rounded-lg sidebar-link"
+                href="<?= route('edit-profile') ?>"
+                class="flex items-center space-x-3 p-3 rounded-lg sidebar-link <?= activeClass('edit-profile') ?>"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -73,8 +73,8 @@
                 <span class="font-medium">Edit Profile</span>
             </a>
             <a
-                href="./change-password.html"
-                class="flex items-center space-x-3 p-3 rounded-lg sidebar-link"
+                href="<?= route('change-password') ?>"
+                class="flex items-center space-x-3 p-3 rounded-lg sidebar-link <?= activeClass('change-password') ?>"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

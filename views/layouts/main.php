@@ -97,7 +97,7 @@
 
             <?php require __DIR__ . '/_header.php'; ?>
 
-            <?php require $content; ?>
+            <?= $content; ?>
 
         </main>
 

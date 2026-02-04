@@ -137,7 +137,7 @@
     <p>
         Don't have an account?
         <a
-            href="./signup.html"
+            href="<?= route('signup') ?>"
             class="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors"
         >Sign up</a
         >
