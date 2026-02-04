@@ -4,7 +4,11 @@
             class="bg-gradient-to-r from-indigo-500 to-purple-600 h-2"
         ></div>
         <div class="p-6">
-            <form class="space-y-6">
+            <form
+                method="POST"
+                action="<?= route('change-password') ?>"
+                class="space-y-6"
+            >
                 <div class="grid grid-cols-1 gap-6">
                     <div>
                         <label
@@ -32,10 +36,12 @@
                             </div>
                             <input
                                 type="password"
+                                name="current_password"
                                 class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
                                 placeholder="••••••••"
                             />
                         </div>
+                        <?= errorMsg('current_password') ?>
                     </div>
 
                     <div>
@@ -64,10 +70,12 @@
                             </div>
                             <input
                                 type="password"
+                                name="new_password"
                                 class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
                                 placeholder="••••••••"
                             />
                         </div>
+                        <?= errorMsg('new_password') ?>
                     </div>
 
                     <div>
@@ -96,10 +104,12 @@
                             </div>
                             <input
                                 type="password"
+                                name="confirm_new_password"
                                 class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
                                 placeholder="••••••••"
                             />
                         </div>
+                        <?= errorMsg('confirm_new_password') ?>
                     </div>
                 </div>
 

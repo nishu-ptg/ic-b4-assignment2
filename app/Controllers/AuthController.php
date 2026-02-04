@@ -93,6 +93,15 @@ class AuthController
         redirect('dashboard');
     }
 
+    public function logout()
+    {
+//        dd(__METHOD__);
+        $_SESSION = [];
+        session_destroy();
+
+        redirect('login');
+    }
+
     private function validateSignup(array $data): array
     {
         $errors = [];

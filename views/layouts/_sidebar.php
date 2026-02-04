@@ -94,6 +94,7 @@
             </a>
             <a
                 href="#"
+                onclick="document.getElementById('logout-form').submit(); return false;"
                 class="flex items-center space-x-3 p-3 rounded-lg sidebar-link"
             >
                 <svg
@@ -113,5 +114,6 @@
                 <span class="font-medium">Logout</span>
             </a>
         </nav>
+        <form id="logout-form" action="<?= route("logout") ?>" method="POST" style="display: none;"></form>
     </div>
 </aside>
