@@ -46,7 +46,29 @@ class UserController
                 'header' => 'Edit Profile',
                 'subHeader' => 'Update your personal information',
             ],
+            'user' => $this->user,
         ]);
+    }
+
+    public function updateProfile()
+    {
+        $input = sanitizeInput($_POST);
+
+        $errors = $this->validateUpdateProfile($input);
+
+        if (!empty($errors)) goBack($errors, $input);
+
+        db_query("
+                UPDATE users 
+                SET name = ?, email = ? 
+                WHERE id = ?
+            ", [
+                $input['name'],
+                $input['email'],
+                $this->user['id']
+            ]);
+
+        redirect('dashboard');
     }
 
     public function changePassword()
@@ -58,5 +80,22 @@ class UserController
                 'subHeader' => 'Ensure your account is secure',
             ],
         ]);
+    }
+
+    private function validateUpdateProfile(array $data): array
+    {
+        $errors = [];
+
+        foreach (['name', 'email'] as $field) {
+            if (empty($data[$field])) {
+                $errors[$field][] = ucfirst(str_replace('_', ' ', $field)) . ' is required.';
+            }
+        }
+
+        if (!filter_var($data['email'] ?? '', FILTER_VALIDATE_EMAIL)) {
+            $errors['email'][] = 'Invalid email format.';
+        }
+
+        return $errors;
     }
 }

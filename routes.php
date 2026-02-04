@@ -8,6 +8,7 @@ return [
 
     'dashboard:get' => 'User.dashboard',
     'edit-profile:get' => 'User.editProfile',
+    'edit-profile:post' => 'User.updateProfile',
     'change-password:get' => 'User.changePassword',
 
 ];

@@ -4,7 +4,11 @@
             class="bg-gradient-to-r from-indigo-500 to-purple-600 h-2"
         ></div>
         <div class="p-6">
-            <form class="space-y-6">
+            <form
+                method="POST"
+                action="<?= route('edit-profile') ?>"
+                class="space-y-6"
+            >
                 <div class="grid grid-cols-1 gap-6">
                     <div>
                         <label
@@ -32,11 +36,13 @@
                             </div>
                             <input
                                 type="text"
-                                value="Alex Johnson"
+                                name="name"
+                                value="<?= old('name', $user['name']) ?>"
                                 class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
                                 placeholder="John Doe"
                             />
                         </div>
+                        <?= errorMsg('name') ?>
                     </div>
 
                     <div>
@@ -65,11 +71,13 @@
                             </div>
                             <input
                                 type="email"
-                                value="alex.johnson@example.com"
+                                name="email"
+                                value="<?= old('email', $user['email']) ?>"
                                 class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
                                 placeholder="you@example.com"
                             />
                         </div>
+                        <?= errorMsg('email') ?>
                     </div>
                 </div>
 
