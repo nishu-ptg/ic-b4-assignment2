@@ -1,8 +1,12 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+session_start();
 
-$routes = require_once __DIR__ . '/../routes.php';
+define('ROOT_PATH', __DIR__ . '/..');
+
+require_once ROOT_PATH . '/vendor/autoload.php';
+
+$routes = require_once ROOT_PATH . '/routes.php';
 
 // $route = $_GET['route'] ?? 'dashboard';
 define('CURRENT_ROUTE', $_GET['route'] ?? 'dashboard');

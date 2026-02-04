@@ -24,7 +24,11 @@
 <div
     class="bg-white glass rounded-2xl shadow-xl p-8 transition-all duration-300 hover:shadow-2xl"
 >
-    <form class="space-y-6 animate-fadeIn">
+    <form
+        method="POST"
+        action="<?= route('signup') ?>"
+        class="space-y-6 animate-fadeIn"
+    >
         <div class="grid grid-cols-1 gap-4">
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2"
@@ -51,6 +55,7 @@
                     </div>
                     <input
                         type="text"
+                        name="name"
                         class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent input-focus transition-all duration-300"
                         placeholder="John doe"
                     />
@@ -83,6 +88,7 @@
                 </div>
                 <input
                     type="email"
+                    name="email"
                     class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent input-focus transition-all duration-300"
                     placeholder="you@example.com"
                 />
@@ -114,6 +120,7 @@
                 </div>
                 <input
                     type="password"
+                    name="password"
                     class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent input-focus transition-all duration-300"
                     placeholder="••••••••"
                 />
@@ -145,6 +152,7 @@
                 </div>
                 <input
                     type="password"
+                    name="confirm_password"
                     class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent input-focus transition-all duration-300"
                     placeholder="••••••••"
                 />

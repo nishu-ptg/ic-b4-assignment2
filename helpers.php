@@ -27,3 +27,25 @@ function activeClass($name, $class = 'active'): string
 {
     return isRoute($name) ? $class : '';
 }
+
+function config(string $key, $default = null)
+{
+    static $config = null;
+
+    if ($config === null) {
+        $config = require ROOT_PATH . '/config.php';
+    }
+
+    return $config[$key] ?? $default;
+}
+
+function db(): PDO
+{
+    return \App\DB::connect();
+}
+
+function redirect(string $routeName)
+{
+    header("Location: " . route($routeName));
+    exit;
+}
