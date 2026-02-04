@@ -2,16 +2,10 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+$routes = require_once __DIR__ . '/../routes.php';
+
 $route = $_GET['route'] ?? 'dashboard';
 $method = strtolower($_SERVER['REQUEST_METHOD']);
-
-$routes = [
-    'dashboard:get' => 'User.dashboard',
-    'login:get'     => 'Auth.login',
-    'login:post'    => 'Auth.handleLogin',
-    'signup:get'    => 'Auth.signup',
-];
-
 $key = "$route:$method";
 
 if (array_key_exists($key, $routes)) {

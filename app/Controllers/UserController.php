@@ -6,6 +6,16 @@ class UserController
 {
     public function dashboard()
     {
-        die(__METHOD__);
+        view('user/dashboard');
+    }
+
+    public function editProfile()
+    {
+        view('user/edit-profile');
+    }
+
+    public function changePassword()
+    {
+        view('user/change-password');
     }
 }
