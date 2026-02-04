@@ -44,7 +44,37 @@ class AuthController
 
     public function handleLogin()
     {
-        die(__METHOD__);
+        $input = sanitizeInput($_POST);
+        $errors = $this->validateLogin($input);
+//        dd($errors, $input);
+
+        if(!empty($errors)) goBack($errors, $input);
+
+        $stmt = db()->prepare("
+            SELECT id, name, email, password
+            FROM users
+            WHERE email = ?
+            LIMIT 1
+        ");
+        $stmt->execute([$input['email']]);
+        $user = $stmt->fetch();
+
+//        dd($user);
+
+        if (!$user || !password_verify($input['password'], $user['password'])) {
+            goBack([
+                'email' => ['Invalid email or password'],
+            ], $input);
+        }
+
+        $_SESSION['user'] = [
+            'id'   => $user['id'],
+            'name' => $user['name'],
+            'email'=> $user['email']
+        ];
+
+        redirect('dashboard');
+
     }
 
     private function validateSignup(array $data): array
@@ -65,8 +95,29 @@ class AuthController
             $errors['password'][] = "Password must be at least 6 characters.";
         }
 
-        if (($data['password'] ?? '') !== ($data['password_confirmation'] ?? '')) {
-            $errors['password_confirmation'][] = "Passwords do not match.";
+        if (($data['password'] ?? '') !== ($data['confirm_password'] ?? '')) {
+            $errors['confirm_password'][] = "Passwords do not match.";
+        }
+
+        return $errors;
+    }
+
+    private function validateLogin(array $data): array
+    {
+        $errors = [];
+
+        foreach (['email', 'password'] as $field) {
+            if (empty($data[$field])) {
+                $errors[$field][] = ucfirst(str_replace('_', ' ', $field)) . ' is required.';
+            }
+        }
+
+        if (!filter_var($data['email'] ?? '', FILTER_VALIDATE_EMAIL)) {
+            $errors['email'][] = 'Invalid email format.';
+        }
+
+        if (strlen($data['password'] ?? '') < 6) {
+            $errors['password'][] = "Password must be at least 6 characters.";
         }
 
         return $errors;

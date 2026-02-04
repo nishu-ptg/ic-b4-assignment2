@@ -86,11 +86,11 @@ function error(string $field): string
 
 function dump(...$vars): void
 {
-    echo '<div style="background: #000; color: #fff;">';
     foreach ($vars as $var) {
-        echo '<pre>'; print_r($var); echo '</pre>';
+        echo '<pre style="background: #222; color: #dd0; padding: 8px; margin: 8px 0;">';
+            print_r($var);
+        echo '</pre>';
     }
-    echo '</div>';
 }
 
 function dd(...$vars): void

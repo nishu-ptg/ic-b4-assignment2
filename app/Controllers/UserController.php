@@ -6,11 +6,13 @@ class UserController
 {
     public function dashboard()
     {
+        $user = $_SESSION['user'];
+
         view('user/dashboard', [
             'title' => 'Dashboard',
             'page' => [
                 'header' => 'My Dashboard',
-                'subHeader' => 'Welcome back, Alex Johnson!',
+                'subHeader' => "Welcome back, {$user["name"]}!",
             ],
         ]);
     }
