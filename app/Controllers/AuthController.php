@@ -13,9 +13,7 @@ class AuthController
 
     public function signup()
     {
-        view('auth/signup', [
-            'title' => 'Sign Up',
-        ], 'auth');
+        view('auth/signup', ['title' => 'Sign Up'], 'auth');
     }
 
     public function handleSignup()
@@ -29,15 +27,8 @@ class AuthController
 
         $hashedPassword = password_hash($input['password'], PASSWORD_DEFAULT);
 
-        $stmt = db()->prepare("
-            INSERT INTO users (name, email, password)
-            VALUES (?, ?, ?)
-        ");
-        $stmt->execute([
-            $input['name'],
-            $input['email'],
-            $hashedPassword
-        ]);
+        $stmt = db()->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
+        $stmt->execute([$input['name'], $input['email'], $hashedPassword]);
 
         flash('success', 'Signup successful! Please log in.');
         redirect("login");
@@ -45,9 +36,7 @@ class AuthController
 
     public function login()
     {
-        view('auth/login', [
-            'title' => 'Login',
-        ], 'auth');
+        view('auth/login', ['title' => 'Login'], 'auth');
     }
 
     public function handleLogin()
@@ -58,24 +47,9 @@ class AuthController
 
         if(!empty($errors)) goBack($errors, $input);
 
-//        $stmt = db()->prepare("
-//            SELECT id, email, password
-//            FROM users
-//            WHERE email = ?
-//            LIMIT 1
-//        ");
-//        $stmt->execute([$input['email']]);
-//        $user = $stmt->fetch();
-
-        $user = db_query("
-            SELECT id, email, password 
-            FROM users 
-            WHERE email = ?
-            LIMIT 1
-        ", [
-            $input['email']
-        ])->fetch();
-
+        $user = db_query("SELECT id, email, password FROM users WHERE email = ? LIMIT 1",
+            [$input['email']]
+        )->fetch();
 //        dd($user);
 
         if (!$user || !password_verify($input['password'], $user['password'])) {
@@ -84,11 +58,6 @@ class AuthController
             ], $input);
         }
 
-//        $_SESSION['user'] = [
-//            'id'   => $user['id'],
-//            'name' => $user['name'],
-//            'email'=> $user['email']
-//        ];
         $_SESSION['user_id'] = $user['id'];
 
         redirect('dashboard');
@@ -105,13 +74,7 @@ class AuthController
 
     private function validateSignup(array $data): array
     {
-        $errors = [];
-
-        foreach (['name', 'email', 'password', 'confirm_password'] as $field) {
-            if (empty($data[$field])) {
-                $errors[$field][] = ucfirst(str_replace('_', ' ', $field)) . ' is required.';
-            }
-        }
+        $errors = validateRequired($data, ['name', 'email', 'password', 'confirm_password']);
 
         if (!filter_var($data['email'] ?? '', FILTER_VALIDATE_EMAIL)) {
             $errors['email'][] = 'Invalid email format.';
@@ -119,9 +82,7 @@ class AuthController
 
         if (empty($errors['email'])) {
             $user = db_query("SELECT id FROM users WHERE email = ? LIMIT 1", [$data['email']])->fetch();
-            if ($user) {
-                $errors['email'][] = 'Email already registered.';
-            }
+            if ($user) $errors['email'][] = 'Email already registered.';
         }
 
         if (strlen($data['password'] ?? '') < 6) {
@@ -141,13 +102,7 @@ class AuthController
 
     private function validateLogin(array $data): array
     {
-        $errors = [];
-
-        foreach (['email', 'password'] as $field) {
-            if (empty($data[$field])) {
-                $errors[$field][] = ucfirst(str_replace('_', ' ', $field)) . ' is required.';
-            }
-        }
+        $errors = validateRequired($data, ['email', 'password']);
 
         if (!filter_var($data['email'] ?? '', FILTER_VALIDATE_EMAIL)) {
             $errors['email'][] = 'Invalid email format.';

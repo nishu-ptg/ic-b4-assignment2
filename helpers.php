@@ -3,16 +3,13 @@ function view(string $path, array $data = [], string $layout = 'main')
 {
     extract($data);
 
-//    $content = __DIR__ . "/views/{$path}.php";
     ob_start();
     require __DIR__ . "/views/{$path}.php";
     $content = ob_get_clean();
 
     require_once __DIR__ . "/views/layouts/{$layout}.php";
 
-    unset($_SESSION['_errors']);
-    unset($_SESSION['_old']);
-    unset($_SESSION['_flash']);
+    unset($_SESSION['_errors'], $_SESSION['_old']);
 }
 
 function route(string $name = ''): string
@@ -103,23 +100,15 @@ function dump(...$vars): void
 
 function dd(...$vars): void
 {
-    dump(...$vars);
-    die();
+    dump(...$vars); die();
 }
 
 function errorMsg(string $field, string $class = 'text-red-500 text-sm m-1'): string
 {
     $msg = error($field);
 
-    if (empty($msg)) return '';
-
-    return "<p class='{$class}'>{$msg}</p>";
+    return empty($msg) ? '' : "<p class='{$class}'>{$msg}</p>";
 }
-
-//function flash(string $key, string $message)
-//{
-//    $_SESSION['_flash'][$key] = $message;
-//}
 
 function flash(string $key, string $message = null): ?string
 {
@@ -149,8 +138,7 @@ function icon(string $name): string
 {
     $path = __DIR__ . "/views/icons/{$name}.svg";
 
-    return file_exists($path)
-        ? file_get_contents($path) : '';
+    return file_exists($path) ? file_get_contents($path) : '';
 }
 
 function inputField(array $options): void
@@ -158,6 +146,7 @@ function inputField(array $options): void
     $field = array_merge([
         'name' => '',
         'label' => '',
+        'labelRight' => '',
         'type' => 'text',
         'placeholder' => '',
         'iconKey' => '',
@@ -167,6 +156,18 @@ function inputField(array $options): void
     $field['icon'] = $field['iconKey'] ? icon($field['iconKey']) : '';
 
     include __DIR__ . '/views/_input.php';
+}
+
+function validateRequired(array $data, array $fields): array
+{
+    return array_reduce($fields, function ($errors, $field) use ($data) {
+        if (empty($data[$field])) {
+            $label = ucwords(str_replace('_', ' ', $field));
+
+            $errors[$field][] = "{$label} is required.";
+        }
+        return $errors;
+    }, []);
 }
 
 

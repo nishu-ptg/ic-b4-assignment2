@@ -12,7 +12,7 @@
                 <h1
                     class="font-bold text-lg bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
                 >
-                    Interactive Cares
+                    <?= config('app_name', 'APP_NAME') ?>
                 </h1>
                 <p class="text-xs text-gray-500">Dashboard</p>
             </div>

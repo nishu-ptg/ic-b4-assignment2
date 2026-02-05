@@ -29,24 +29,14 @@
             'iconKey' => 'email',
             'value' => old('email'),
         ]); ?>
-        <div>
-            <div class="flex items-center justify-between mb-2">
-                <label class="block text-sm font-semibold text-gray-700">
-                    Password
-                </label>
-                <a href="#"
-                   class="text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors">
-                    Forgot password?
-                </a>
-            </div>
-            <?php inputField([
-                'name' => 'password',
-                'label' => '',
-                'type' => 'password',
-                'placeholder' => '••••••••',
-                'iconKey' => 'lock',
-            ]); ?>
-        </div>
+        <?php inputField([
+            'name' => 'password',
+            'label' => 'Password',
+            'type' => 'password',
+            'placeholder' => '••••••••',
+            'iconKey' => 'lock',
+            'labelRight' => '<a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">Forgot password?</a>',
+        ]); ?>
 
         <div class="flex items-center">
             <input

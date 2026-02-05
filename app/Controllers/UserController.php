@@ -11,12 +11,7 @@ class UserController
         $id = $_SESSION['user_id'] ?? null;
         if (!$id) redirect('login');
 
-        $this->user = db_query("
-                SELECT id, name, email 
-                FROM users 
-                WHERE id = ? 
-                LIMIT 1
-            ", [$id])
+        $this->user = db_query("SELECT id, name, email FROM users WHERE id = ? LIMIT 1", [$id])
             ->fetch();
 
         if (!$this->user) { // what happened? user deleted??
@@ -57,15 +52,9 @@ class UserController
 
         if (!empty($errors)) goBack($errors, $input);
 
-        db_query("
-                UPDATE users 
-                SET name = ?, email = ? 
-                WHERE id = ?
-            ", [
-                $input['name'],
-                $input['email'],
-                $this->user['id']
-            ]);
+        db_query("UPDATE users SET name = ?, email = ? WHERE id = ?",
+            [$input['name'], $input['email'], $this->user['id']]
+        );
 
         flash('success', 'Profile updated successfully!');
         redirect('dashboard');
@@ -92,14 +81,9 @@ class UserController
 
         $newPassword = password_hash($input['password'], PASSWORD_DEFAULT);
 
-        db_query("
-                UPDATE users 
-                SET password = ? 
-                WHERE id = ?
-            ", [
-                $newPassword,
-                $this->user['id']
-            ]);
+        db_query("UPDATE users SET password = ? WHERE id = ?", [
+            $newPassword, $this->user['id']
+        ]);
 
         flash('success', 'Password changed successfully!');
         redirect('dashboard');
@@ -107,13 +91,7 @@ class UserController
 
     private function validateUpdateProfile(array $data): array
     {
-        $errors = [];
-
-        foreach (['name', 'email'] as $field) {
-            if (empty($data[$field])) {
-                $errors[$field][] = ucfirst(str_replace('_', ' ', $field)) . ' is required.';
-            }
-        }
+        $errors = validateRequired($data, ['name', 'email']);
 
         if (!filter_var($data['email'] ?? '', FILTER_VALIDATE_EMAIL)) {
             $errors['email'][] = 'Invalid email format.';
@@ -125,9 +103,7 @@ class UserController
                 [$data['email'], $this->user['id']]
             )->fetch();
 
-            if ($existing) {
-                $errors['email'][] = 'Email already registered.';
-            }
+            if ($existing) $errors['email'][] = 'Email already registered.';
         }
 
         return $errors;
@@ -135,13 +111,7 @@ class UserController
 
     private function validateUpdatePassword(array $data): array
     {
-        $errors = [];
-
-        foreach (['current_password', 'new_password', 'confirm_new_password'] as $field) {
-            if (empty($data[$field])) {
-                $errors[$field][] = ucfirst(str_replace('_', ' ', $field)) . ' is required.';
-            }
-        }
+        $errors = validateRequired($data, ['current_password', 'new_password', 'confirm_new_password']);
 
         if (empty($errors)) {
             $user = db_query("SELECT password FROM users WHERE id = ?", [$this->user['id']])->fetch();
