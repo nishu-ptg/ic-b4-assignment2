@@ -45,7 +45,7 @@ class DB
                 );
             } catch (PDOException $e) {
                 // TODO: log this
-                die("Database Connection Error: " . $e->getMessage());
+                abort(500, $e->getMessage());
             }
         }
 

@@ -36,7 +36,7 @@ class AuthController
 
     public function login()
     {
-        view('auth/login', ['title' => 'Login'], 'auth');
+        view('auth.login', ['title' => 'Login'], 'auth');
     }
 
     public function handleLogin()

@@ -1,11 +1,23 @@
 <?php
 function view(string $path, array $data = [], string $layout = 'main')
 {
+    $normalize = fn($str) => str_replace(['\\', '.'], '/', $str);
+
+    $viewPath = $normalize($path);
+    $viewFile = ROOT_PATH . "/views/{$viewPath}.php";
+
+    if (!file_exists($viewFile)) abort(500, "View {$viewPath} not found");
+
     extract($data);
 
     ob_start();
-    require __DIR__ . "/views/{$path}.php";
+    require $viewFile;
     $content = ob_get_clean();
+
+    $layoutPath = $normalize($layout);
+    $layoutFile = ROOT_PATH . "/views/layouts/{$layoutPath}.php";
+
+    if (!file_exists($layoutFile)) abort(500, "Layout {$layoutPath} not found");
 
     require_once __DIR__ . "/views/layouts/{$layout}.php";
 
@@ -47,9 +59,13 @@ function db(): PDO
 
 function db_query(string $sql, array $params = []): PDOStatement
 {
-    $stmt = db()->prepare($sql);
-    $stmt->execute($params);
-    return $stmt;
+    try {
+        $stmt = db()->prepare($sql);
+        $stmt->execute($params);
+        return $stmt;
+    } catch (PDOException $e) {
+        abort(500, $e->getMessage());
+    }
 }
 
 function redirect(string $routeName)
@@ -168,6 +184,34 @@ function validateRequired(array $data, array $fields): array
         }
         return $errors;
     }, []);
+}
+
+function dispatch(array $routes, string $path, string $method)
+{
+    $method = strtolower($method);
+    $key = "{$path}:{$method}";
+
+    if (!isset($routes[$key])) abort(404);
+
+    [$controller, $action] = explode('.', $routes[$key]);
+    $className = "App\\Controllers\\{$controller}Controller";
+
+    if (!class_exists($className)) {
+        abort(500, "Undefined Controller '{$className}'.");
+    }
+
+    $instance = new $className();
+    $instance->$action();
+}
+
+function abort(int $code = 500, string $message = ''): void
+{
+    http_response_code($code);
+
+    if(empty($message) && $code === 404) $message = 'Not Found';
+
+    require ROOT_PATH . '/views/error.php';
+    exit;
 }
 
 
