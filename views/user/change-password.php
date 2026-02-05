@@ -10,107 +10,29 @@
                 class="space-y-6"
             >
                 <div class="grid grid-cols-1 gap-6">
-                    <div>
-                        <label
-                            class="block text-sm font-semibold text-gray-700 mb-2"
-                        >Current Password</label
-                        >
-                        <div class="relative">
-                            <div
-                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-5 h-5 text-gray-400"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-                                    />
-                                </svg>
-                            </div>
-                            <input
-                                type="password"
-                                name="current_password"
-                                class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
-                                placeholder="••••••••"
-                            />
-                        </div>
-                        <?= errorMsg('current_password') ?>
-                    </div>
+                    <?php inputField([
+                        'name' => 'current_password',
+                        'label' => 'Current Password',
+                        'type' => 'password',
+                        'placeholder' => '••••••••',
+                        'iconKey' => 'lock',
+                    ]); ?>
 
-                    <div>
-                        <label
-                            class="block text-sm font-semibold text-gray-700 mb-2"
-                        >New Password</label
-                        >
-                        <div class="relative">
-                            <div
-                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-5 h-5 text-gray-400"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-                                    />
-                                </svg>
-                            </div>
-                            <input
-                                type="password"
-                                name="new_password"
-                                class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
-                                placeholder="••••••••"
-                            />
-                        </div>
-                        <?= errorMsg('new_password') ?>
-                    </div>
+                    <?php inputField([
+                        'name' => 'new_password',
+                        'label' => 'New Password',
+                        'type' => 'password',
+                        'placeholder' => '••••••••',
+                        'iconKey' => 'lock',
+                    ]); ?>
 
-                    <div>
-                        <label
-                            class="block text-sm font-semibold text-gray-700 mb-2"
-                        >Confirm New Password</label
-                        >
-                        <div class="relative">
-                            <div
-                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-5 h-5 text-gray-400"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-                                    />
-                                </svg>
-                            </div>
-                            <input
-                                type="password"
-                                name="confirm_new_password"
-                                class="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
-                                placeholder="••••••••"
-                            />
-                        </div>
-                        <?= errorMsg('confirm_new_password') ?>
-                    </div>
+                    <?php inputField([
+                        'name' => 'confirm_new_password',
+                        'label' => 'Confirm New Password',
+                        'type' => 'password',
+                        'placeholder' => '••••••••',
+                        'iconKey' => 'lock',
+                    ]); ?>
                 </div>
 
                 <div class="flex justify-end pt-4">
