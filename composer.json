@@ -9,6 +9,11 @@
             "helpers.php"
         ]
     },
+    "scripts": {
+        "migrate": "App\\Controllers\\DbController::migrate",
+        "rollback": "App\\Controllers\\DbController::rollback",
+        "refresh": "App\\Controllers\\DbController::refresh"
+    },
     "authors": [
         {
             "name": "Ali Nishu",

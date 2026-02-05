@@ -22,12 +22,18 @@ class DB
     public static function connect(): PDO
     {
         if (self::$instance === null) {
-            // Grab database settings from our config helper
-            $config = config('database');
+            // Grab database settings from config
+            if (php_sapi_name() === 'cli') {
+                $configPath = dirname(__DIR__) . '/config.php';
+                $allConfigs = require $configPath;
+                $config = $allConfigs['database'];
+            } else {
+                $config = config('database');
+            }
 
             try {
                 // Construct the DSN (Data Source Name)
-                $dsn = "mysql:host={$config['host']};dbname={$config['dbname']};charset={$config['charset']}";
+                $dsn = "mysql:host={$config['host']};port={$config['port']};dbname={$config['dbname']};charset={$config['charset']}";
 
                 // Initialize PDO
                 self::$instance = new PDO(
@@ -45,7 +51,12 @@ class DB
                 );
             } catch (PDOException $e) {
                 // TODO: log this
-                abort(500, $e->getMessage());
+                if (php_sapi_name() === 'cli') {
+                    exit("\n[ERROR] {$e->getMessage()}\n");
+                } else {
+                    abort(500, $e->getMessage());
+                }
+
             }
         }
 

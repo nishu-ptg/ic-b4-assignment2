@@ -46,7 +46,11 @@ function config(string $key, $default = null)
     static $config = null;
 
     if ($config === null) {
-        $config = require ROOT_PATH . '/config.php';
+        $configFile = ROOT_PATH . '/config.php';
+
+        if (!file_exists($configFile)) abort(500, "Config file not found");
+
+        $config = require $configFile;
     }
 
     return $config[$key] ?? $default;
@@ -191,7 +195,13 @@ function dispatch(array $routes, string $path, string $method)
     $method = strtolower($method);
     $key = "{$path}:{$method}";
 
-    if (!isset($routes[$key])) abort(404);
+    if (!isset($routes[$key])) {
+        if (isset($routes[$path]) && $method === 'get') {
+            $key = $path;
+        } else {
+            abort(404);
+        }
+    }
 
     [$controller, $action] = explode('.', $routes[$key]);
     $className = "App\\Controllers\\{$controller}Controller";
@@ -201,6 +211,10 @@ function dispatch(array $routes, string $path, string $method)
     }
 
     $instance = new $className();
+    if (!method_exists($instance, $action)) {
+        abort(500, "Action '{$action}' not defined in '{$className}'.");
+    }
+
     $instance->$action();
 }
 
